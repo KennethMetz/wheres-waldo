@@ -6,7 +6,7 @@ import castle from "./castle.jpeg";
 
 import { getDoc, doc, setDoc } from "firebase/firestore";
 
-import { Gameplay, recordClickLocation, dropTarget } from "./Gameplay";
+import { recordClickLocation, placeTarget } from "./Gameplay";
 
 import { useState } from "react";
 
@@ -31,61 +31,40 @@ export { db };
 
 function Level1() {
   const [targetToggle, setTargetToggle] = useState(false);
+  const [clickLocation, setClickLocation] = useState([0, 0]);
 
   return (
     <div>
       <div className="home">
-        <h1
-          className="title"
-          onClick={(e) => {
-            recordClickLocation(e);
-          }}
-        >
-          LEVEL1
-        </h1>
-        <div className="textHome">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Pharetra
-          pharetra massa massa ultricies. Quam viverra orci sagittis eu. Dapibus
-          ultrices in iaculis nunc.
+        <h1 className="header"> LEVEL1 </h1>
+        <div className="imageContainer">
+          <img
+            className="waldo"
+            src={castle}
+            alt="The Where's Waldo cartoon standing in a forest clearing with four other people spaced very far apart"
+            onClick={(e) => {
+              recordClickLocation(e);
+              console.log(e.nativeEvent.offsetY);
+              console.log(e.nativeEvent.target.offsetHeight);
+              targetToggle ? setTargetToggle(false) : setTargetToggle(true);
+              let x = Math.round(
+                (e.nativeEvent.offsetX / e.nativeEvent.target.offsetWidth -
+                  40 / e.nativeEvent.target.offsetWidth) *
+                  100
+              );
+              let y = Math.round(
+                (e.nativeEvent.offsetY / e.nativeEvent.target.offsetHeight -
+                  35 / e.nativeEvent.target.offsetHeight) *
+                  100
+              );
+              setClickLocation([x, y]);
+            }}
+          ></img>
+          {placeTarget(targetToggle, setTargetToggle, clickLocation)}
         </div>
-        <img
-          src={castle}
-          alt="The Where's Waldo cartoon standing in a forest clearing with four other people spaced very far apart"
-          onClick={(e) => {
-            recordClickLocation(e);
-            targetToggle ? setTargetToggle(false) : setTargetToggle(true);
-            console.log(targetToggle);
-          }}
-        ></img>
       </div>
-      {placeTarget(targetToggle)}
     </div>
   );
-}
-
-function placeTarget(targetToggle, setTargetToggle) {
-  console.log(targetToggle);
-  if (targetToggle) {
-    return (
-      <div className="targetLayer">
-        <div className="target">TARGET</div>
-        <div
-          className="selector"
-          onClick={(e) => {
-            targetToggle ? setTargetToggle(false) : setTargetToggle(true);
-          }}
-        >
-          <div>
-            <p>Waldo</p>
-          </div>
-          <div>
-            <p>Wizard</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 }
 
 export default Level1;
