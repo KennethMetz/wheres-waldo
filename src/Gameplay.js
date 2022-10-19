@@ -3,14 +3,6 @@ import waldoImg from "./waldo.webp";
 import wizard from "./wizard.webp";
 import odlaw from "./odlaw.webp";
 
-let charSelection = null;
-
-function Gameplay() {
-  console.log("gameplay");
-}
-
-function recordClickLocation(e) {}
-
 function checkWaldoGuess(answer, clickLocation) {
   if (
     clickLocation[0] <= answer.waldo[0] + 5 &&
@@ -53,7 +45,9 @@ function PlaceTarget(
   setTargetToggle,
   targetLocation,
   answer,
-  clickLocation
+  clickLocation,
+  punchcard,
+  setpunchcard
 ) {
   // const [guessToggle, setGuessToggle] = useState(false);
 
@@ -75,7 +69,9 @@ function PlaceTarget(
             id="underlined"
             onClick={(e) => {
               if (checkWaldoGuess(answer, clickLocation)) {
-                // markChar()
+                let temp = punchcard.slice();
+                temp[0] = 1;
+                setpunchcard(temp);
               }
             }}
           >
@@ -87,6 +83,9 @@ function PlaceTarget(
             id="underlined"
             onClick={(e) => {
               checkWizardGuess(answer, clickLocation);
+              let temp = punchcard.slice();
+              temp[1] = 1;
+              setpunchcard(temp);
             }}
           >
             <img src={wizard} alt="the wizard"></img>
@@ -97,6 +96,9 @@ function PlaceTarget(
             className="guessCard"
             onClick={(e) => {
               checkOdlawGuess(answer, clickLocation);
+              let temp = punchcard.slice();
+              temp[2] = 1;
+              setpunchcard(temp);
             }}
           >
             <img src={odlaw} alt="odlaw"></img>
@@ -109,4 +111,54 @@ function PlaceTarget(
   }
 }
 
-export { recordClickLocation, PlaceTarget };
+function waldoCharMarker(punchcard, answer, targetLocation) {
+  if (punchcard[0] === 1) {
+    console.log(targetLocation[3]);
+    return (
+      <div
+        id="answer"
+        className="target"
+        style={{
+          left: answer.waldo[0] - (40 / targetLocation[2]) * 100 + "%",
+          top: answer.waldo[1] - (35 / targetLocation[3]) * 100 + "%",
+        }}
+      ></div>
+    );
+  }
+}
+
+function wizardCharMarker(punchcard, answer, targetLocation) {
+  console.log(punchcard);
+  if (punchcard[1] === 1) {
+    console.log("da wizzzz");
+
+    return (
+      <div
+        id="answer"
+        className="target"
+        style={{
+          left: answer.wizard[0] - (40 / targetLocation[2]) * 100 + "%",
+          top: answer.wizard[1] - (35 / targetLocation[3]) * 100 + "%",
+        }}
+      ></div>
+    );
+  }
+}
+function odlawCharMarker(punchcard, answer, targetLocation) {
+  if (punchcard[2] === 1) {
+    console.log("odlaw");
+
+    return (
+      <div
+        id="answer"
+        className="target"
+        style={{
+          left: answer.odlaw[0] - (40 / targetLocation[2]) * 100 + "%",
+          top: answer.odlaw[1] - (35 / targetLocation[3]) * 100 + "%",
+        }}
+      ></div>
+    );
+  }
+}
+
+export { PlaceTarget, waldoCharMarker, wizardCharMarker, odlawCharMarker };

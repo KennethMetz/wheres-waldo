@@ -146,3 +146,8 @@ body {
 .imageContainer {
   position: relative;
 }
+
+#answer {
+  position: absolute;
+  border-color: rgb(38, 224, 85);
+}

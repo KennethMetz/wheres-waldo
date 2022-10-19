@@ -6,7 +6,13 @@ import winter from "./winter.jpg";
 
 import { getDoc, doc } from "firebase/firestore";
 
-import { recordClickLocation, PlaceTarget } from "./Gameplay";
+import {
+  recordClickLocation,
+  PlaceTarget,
+  waldoCharMarker,
+  wizardCharMarker,
+  odlawCharMarker,
+} from "./Gameplay";
 
 import { useState } from "react";
 
@@ -33,15 +39,15 @@ function Level1() {
   const [targetToggle, setTargetToggle] = useState(false);
   const [targetLocation, setTargetLocation] = useState([0, 0]);
   const [clickLocation, setClickLocation] = useState([0, 0]);
-  const [punchcard, setPunchcard] = useState(0);
+  const [punchcard, setPunchcard] = useState([0, 0, 0]);
 
   const [answer, setAnswer] = useState({
-    odlaw: [50, 50],
-    waldo: [50, 50],
-    wizard: [50, 50],
+    odlaw: [100, 100],
+    waldo: [0, 0],
+    wizard: [100, 0],
   });
 
-  let trueLocation = [0, 0];
+  let charSelection = null;
 
   //COMMENTED OUT TO STOP EXCEEDING FIREBASE QUOTAS
 
@@ -63,7 +69,7 @@ function Level1() {
       <div className="home">
         <div className="header">
           {" "}
-          <h1 className="statusField"></h1>{" "}
+          <div className="statusField"></div>{" "}
         </div>
         <div className="imageContainer">
           <img
@@ -71,7 +77,6 @@ function Level1() {
             src={winter}
             alt="A Where's Waldo cartoon set at a ski hill"
             onClick={(e) => {
-              recordClickLocation(e);
               targetToggle ? setTargetToggle(false) : setTargetToggle(true);
               let x = Math.round(
                 (e.nativeEvent.offsetX / e.nativeEvent.target.offsetWidth -
@@ -83,7 +88,12 @@ function Level1() {
                   35 / e.nativeEvent.target.offsetHeight) *
                   100
               );
-              setTargetLocation([x, y]);
+              setTargetLocation([
+                x,
+                y,
+                e.nativeEvent.target.offsetWidth,
+                e.nativeEvent.target.offsetHeight,
+              ]);
               let xTrue = Math.round(
                 (e.nativeEvent.offsetX / e.nativeEvent.target.offsetWidth) * 100
               );
@@ -99,8 +109,13 @@ function Level1() {
             setTargetToggle,
             targetLocation,
             answer,
-            clickLocation
+            clickLocation,
+            punchcard,
+            setPunchcard
           )}
+          {waldoCharMarker(punchcard, answer, targetLocation)}
+          {wizardCharMarker(punchcard, answer, targetLocation)}
+          {odlawCharMarker(punchcard, answer, targetLocation)}
         </div>
       </div>
     </div>
