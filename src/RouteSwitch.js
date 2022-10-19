@@ -5,11 +5,13 @@ import Leaderboard from "./Leaderboard";
 import Level1 from "./Level1";
 import Level2 from "./Level2";
 import Gameover from "./Gameover";
+import Header from "./Header";
 
 const RouteSwitch = () => {
   return (
     <div>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/leaderboard" element={<Leaderboard />} />

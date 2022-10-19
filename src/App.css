@@ -1,3 +1,88 @@
+/***************HOME********************/
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.levelTiles {
+  margin-top: 100px;
+  display: flex;
+}
+
+.block1 {
+  margin-right: 20vw;
+}
+
+.L1,
+.L2 {
+  background-image: url(./winter.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 25vw;
+  width: 25vw;
+  border: 1px black solid;
+  border-radius: 8px;
+  box-shadow: rgb(201, 199, 199) 5px 5px 50px 5px;
+}
+
+.lbButton {
+  display: flex;
+  margin-top: 100px;
+  width: 30vw;
+  height: 80px;
+  border: black 1px solid;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(238, 241, 240);
+}
+/*******************HEADER******************/
+.header {
+  display: grid;
+  grid-template-columns: 15% 35% 50%;
+  align-items: center;
+  height: 60px;
+  position: sticky;
+  top: 0px;
+  margin: 0px;
+}
+
+p {
+  text-align: center;
+}
+
+.characters {
+  text-align: right;
+}
+
+.characters img {
+  height: 80px;
+}
+
+.header ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+h1 {
+  color: black;
+  text-decoration: unset;
+  font-size: 48px;
+  grid-area: 1/2/2/3;
+}
+
+a:link,
+li,
+p,
+div {
+  list-style: none;
+  color: black;
+  text-decoration: unset;
+  font-size: 20px;
+}
+
 /***************LEVEL 1********************/
 .targetLayer {
   display: flex;
@@ -13,26 +98,49 @@
 }
 
 .selector {
-  border: black solid 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: black solid 2px;
+  margin-left: 15px;
   background-color: white;
   width: 150px;
+  border-radius: 12px;
+}
+.guessCard {
+  display: flex;
+  justify-content: center;
+
+  text-align: center;
+
+  width: 100%;
+}
+.guessCard:hover {
+  font-weight: 600;
+  box-shadow: gray 0px 0px 10px 7px;
+}
+
+.guessCard img {
+  height: 53px;
+  margin-right: 10px;
+}
+
+#underlined.guessCard {
+  border-bottom: black 2px solid;
 }
 
 body {
-  background-color: gray;
   margin: 0px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .waldo {
-  width: 100vw;
-}
-
-.header {
-  height: 60px;
-  position: sticky;
-  top: 0px;
-  background: red;
-  margin: 0px;
+  width: 88vw;
 }
 
 .imageContainer {

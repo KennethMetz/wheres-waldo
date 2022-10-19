@@ -2,23 +2,23 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import "firebase/compat/storage";
-import castle from "./castle.jpeg";
+import winter from "./winter.jpg";
 
-import { getDoc, doc, setDoc } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 
-import { recordClickLocation, placeTarget } from "./Gameplay";
+import { recordClickLocation, PlaceTarget } from "./Gameplay";
 
 import { useState } from "react";
 
 //**********************FIREBASE INITIALIZATION********************
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDA51TWup0oj-OzMkbTO9mro1lXvL3cAxE",
-  authDomain: "to-do-list-5137c.firebaseapp.com",
-  projectId: "to-do-list-5137c",
-  storageBucket: "to-do-list-5137c.appspot.com",
-  messagingSenderId: "920314072751",
-  appId: "1:920314072751:web:7f145f5bba7e29b42dce5a",
+  apiKey: "AIzaSyBXqqhlmO7wfawK1_tlJTsC2lvL8yTN85M",
+  authDomain: "where-s-waldo-427c2.firebaseapp.com",
+  projectId: "where-s-waldo-427c2",
+  storageBucket: "where-s-waldo-427c2.appspot.com",
+  messagingSenderId: "554131916445",
+  appId: "1:554131916445:web:f38caf5ce77d1379727674",
 };
 
 const app = firebase.initializeApp(firebaseConfig);
@@ -31,21 +31,47 @@ export { db };
 
 function Level1() {
   const [targetToggle, setTargetToggle] = useState(false);
+  const [targetLocation, setTargetLocation] = useState([0, 0]);
   const [clickLocation, setClickLocation] = useState([0, 0]);
+  const [punchcard, setPunchcard] = useState(0);
+
+  const [answer, setAnswer] = useState({
+    odlaw: [50, 50],
+    waldo: [50, 50],
+    wizard: [50, 50],
+  });
+
+  let trueLocation = [0, 0];
+
+  //COMMENTED OUT TO STOP EXCEEDING FIREBASE QUOTAS
+
+  //GET ANSWER FROM FIREBASE
+  // let retrieve = async function () {
+  //   let docRef = doc(db, "Level1", "Skiing");
+  //   try {
+  //     let querySnapshot = await getDoc(docRef);
+  //     setAnswer(querySnapshot.data());
+  //   } catch (error) {
+  //     console.error("Error loading data from Firebase Database", error);
+  //   }
+  // };
+
+  // retrieve();
 
   return (
     <div>
       <div className="home">
-        <h1 className="header"> LEVEL1 </h1>
+        <div className="header">
+          {" "}
+          <h1 className="statusField"></h1>{" "}
+        </div>
         <div className="imageContainer">
           <img
             className="waldo"
-            src={castle}
-            alt="The Where's Waldo cartoon standing in a forest clearing with four other people spaced very far apart"
+            src={winter}
+            alt="A Where's Waldo cartoon set at a ski hill"
             onClick={(e) => {
               recordClickLocation(e);
-              console.log(e.nativeEvent.offsetY);
-              console.log(e.nativeEvent.target.offsetHeight);
               targetToggle ? setTargetToggle(false) : setTargetToggle(true);
               let x = Math.round(
                 (e.nativeEvent.offsetX / e.nativeEvent.target.offsetWidth -
@@ -57,10 +83,24 @@ function Level1() {
                   35 / e.nativeEvent.target.offsetHeight) *
                   100
               );
-              setClickLocation([x, y]);
+              setTargetLocation([x, y]);
+              let xTrue = Math.round(
+                (e.nativeEvent.offsetX / e.nativeEvent.target.offsetWidth) * 100
+              );
+              let yTrue = Math.round(
+                (e.nativeEvent.offsetY / e.nativeEvent.target.offsetHeight) *
+                  100
+              );
+              setClickLocation([xTrue, yTrue]);
             }}
           ></img>
-          {placeTarget(targetToggle, setTargetToggle, clickLocation)}
+          {PlaceTarget(
+            targetToggle,
+            setTargetToggle,
+            targetLocation,
+            answer,
+            clickLocation
+          )}
         </div>
       </div>
     </div>

@@ -4,22 +4,27 @@ import "./App.css";
 
 function App() {
   return (
-    <div>
-      BOSS BITCHES ONLY
-      <div className="logo"></div>
-      <ul>
-        <Link to="level1">
-          <li>LEVEL 1</li>
-        </Link>
+    <div className="homeContainer">
+      <div className="levelTiles">
+        <div class="block1">
+          <Link to="level1">
+            <div className="L1"></div>
+            <p>LEVEL 1</p>
+          </Link>
+        </div>
 
-        <Link to="level2">
-          <li>LEVEL 2</li>
-        </Link>
-
+        <div class="block2">
+          <Link to="level2">
+            <div className="L2"></div>
+            <p>LEVEL 2</p>
+          </Link>
+        </div>
+      </div>
+      <div classname="tile">
         <Link to="leaderboard">
-          <li>Leaderboard</li>
+          <div className="lbButton">LEADERBOARD</div>
         </Link>
-      </ul>
+      </div>
     </div>
   );
 }
