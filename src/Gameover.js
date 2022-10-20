@@ -48,10 +48,14 @@ function Gameover(punchcard, score) {
     return (
       <div className="endGameContainer">
         <div className="endGameTile">
-          <div>Congrats!</div>
-          <div>Your Score: {seconds}s</div>
+          <div className="congrats">LEVEL COMPLETE!</div>
+          <br></br>
+          <div className="score">
+            <div>SCORE:</div> <div id="score">{seconds}s</div>
+          </div>{" "}
+          <br></br>
           <form>
-            <label htmlFor="playerName">Name:</label>
+            <label htmlFor="playerName">NAME:</label>
             <input
               type="text"
               id="playerName"
@@ -61,19 +65,23 @@ function Gameover(punchcard, score) {
                 console.log(e.target.value);
               }}
             ></input>
+            <br></br>
+            <br></br>
+            <br></br>
 
             <Link to="/">
-              <button type="button">Cancel</button>
+              <button type="button" className="cancel">
+                CANCEL
+              </button>
             </Link>
-
-            {/* <Link reloadDocument to="/leaderboard"> */}
             <button
+              className="submit"
               type="button"
               onClick={(e) => {
                 submitScore(name, seconds, navigate);
               }}
             >
-              Submit Score
+              SUBMIT SCORE{" "}
             </button>
             {/* </Link> */}
           </form>

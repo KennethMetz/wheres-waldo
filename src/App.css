@@ -16,7 +16,6 @@
 
 .L1,
 .L2 {
-  background-image: url(./winter.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -24,6 +23,14 @@
   width: 25vw;
   border: 1px black solid;
   border-radius: 8px;
+}
+
+.L1 {
+  background-image: url(./winter.jpg);
+}
+
+.L2 {
+  background-image: url(./track-square.jpg);
 }
 
 .L1:hover,
@@ -48,14 +55,16 @@ p:hover {
 }
 
 /*******************HEADER******************/
-.header {
+.headerMain {
   display: grid;
   grid-template-columns: 15% 35% 50%;
   align-items: center;
-  height: 60px;
+  height: 120px;
   position: sticky;
   top: 0px;
   margin: 0px;
+  z-index: 1;
+  background: white;
 }
 
 p {
@@ -70,7 +79,7 @@ p {
   height: 80px;
 }
 
-.header ul {
+.headerMain ul {
   display: flex;
   justify-content: space-evenly;
 }
@@ -97,19 +106,20 @@ li:hover {
 }
 /***************CLOCK********************/
 .timer {
-  position: absolute;
-  top: 0px;
+  position: sticky;
+  top: 135px;
   left: 45%;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
   border: black 2px solid;
   border-radius: 36px;
   padding: 15px;
   text-align: center;
   font-weight: 550;
-  width: 125px;
+  width: 150px;
+  z-index: 1;
 }
 
-/***************LEVEL 1********************/
+/***************LEVEL 1 & 2********************/
 .targetLayer {
   display: flex;
   position: absolute;
@@ -157,6 +167,8 @@ li:hover {
 
 body {
   margin: 0px;
+  width: 100vw;
+  height: 100vh;
 }
 
 .home {
@@ -171,6 +183,7 @@ body {
 
 .imageContainer {
   position: relative;
+  margin-top: -60px;
 }
 
 #answer {
@@ -178,11 +191,116 @@ body {
   border-color: rgb(38, 224, 85);
 }
 
+/***************GAME OVER MSG******************/
+.score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.score div {
+  font-size: 28px;
+}
+#score {
+  font-weight: 700;
+  margin-left: 10px;
+  font-size: 36px;
+}
+button {
+  background-color: white;
+  border: 1px black solid;
+  border-radius: 36px;
+  height: 42px;
+  width: 200px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 16px;
+}
+.cancel {
+  background-color: rgb(255, 181, 181);
+}
+.submit {
+  background-color: rgb(154, 154, 255);
+}
+.endGameContainer {
+  position: absolute;
+  top: 120px;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+  width: 100vw;
+  height: calc(100% + 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.endGameTile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  position: sticky;
+  left: 33%;
+  top: 33%;
+  width: 500px;
+  text-align: center;
+  padding: 20px;
+  height: 150px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  border: 3px black solid;
+}
+.congrats {
+  font-weight: 700;
+  font-size: 36px;
+}
+label {
+  font-size: 28px;
+}
+input {
+  height: 32px;
+  border-radius: 6px;
+  border: 1px black solid;
+  margin-left: 10px;
+}
 /***************LEADERBOARD********************/
+
+.titleLB {
+  font-size: 36px;
+  margin-top: 100px;
+}
+
+.loading {
+  margin-top: 40px;
+  text-align: center;
+}
 
 table,
 td,
 th {
-  border: 1px black solid;
+  /* border: 1px black solid; */
   border-collapse: collapse;
+}
+
+table {
+  margin-top: 20px;
+  width: max(50vw, 500px);
+}
+
+th {
+  height: 40px;
+  border-top: 1px solid black;
+}
+
+td {
+  text-align: center;
+  vertical-align: center;
+}
+
+th,
+td {
+  padding: 8px;
+  border-bottom: 1px solid black;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f2f2f2;
 }

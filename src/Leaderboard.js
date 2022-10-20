@@ -23,6 +23,7 @@ function Leaderboard() {
   const [isActive, setIsActive] = useContext(TimerContext);
   const [seconds, setSeconds] = useContext(ScoreContext);
   const [leaderlist, setLeaderlist] = useState([]);
+  const [loading, setLoading] = useState("LOADING...");
 
   useEffect(() => {
     async function GetLeaderboard() {
@@ -33,6 +34,7 @@ function Leaderboard() {
         let array = Object.entries(leaders); //Convert data object to array
         let sorted = array.sort((a, b) => a[0] - b[0]); //Sort array based on score
         setLeaderlist(sorted);
+        setLoading();
       } catch (error) {
         console.error("Error loading data from Firebase Database", error);
       }
@@ -46,13 +48,13 @@ function Leaderboard() {
   return (
     <div>
       <div className="home">
-        <h2 className="title">LEADERBOARD</h2>
+        <h2 className="titleLB">LEADERBOARD</h2>
         <div className="leaderboard">
           <table>
             <thead>
               <tr>
                 <th>PLAYER NAME</th>
-                <th>SCORE</th>
+                <th>SCORE (s)</th>
               </tr>
             </thead>
             <tbody>
@@ -66,10 +68,7 @@ function Leaderboard() {
               })}
             </tbody>
           </table>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Pharetra
-          pharetra massa massa ultricies. Quam viverra orci sagittis eu. Dapibus
-          ultrices in iaculis nunc.
+          <div className="loading">{loading} </div>
         </div>
       </div>
     </div>

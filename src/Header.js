@@ -10,7 +10,7 @@ function Header() {
   //   const [cart, setCart] = useContext(CartContext);
 
   return (
-    <div className="header">
+    <div className="headerMain">
       <Link to="/">
         <div className="characters">
           <img src={waldoImg}></img>

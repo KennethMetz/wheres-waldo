@@ -51,29 +51,27 @@ function Level1() {
   const [isActive, setIsActive] = useContext(TimerContext);
   const [seconds, setSeconds] = useContext(ScoreContext);
 
-  //COMMENTED OUT TO STOP EXCEEDING FIREBASE QUOTAS
+  let retrieve = async function () {
+    let docRef = doc(db, "Level1", "Skiing");
+    try {
+      let querySnapshot = await getDoc(docRef);
+      setAnswer(querySnapshot.data());
+    } catch (error) {
+      console.error("Error loading data from Firebase Database", error);
+    }
+  };
 
-  //GET ANSWER FROM FIREBASE
-  // let retrieve = async function () {
-  //   let docRef = doc(db, "Level1", "Skiing");
-  //   try {
-  //     let querySnapshot = await getDoc(docRef);
-  //     setAnswer(querySnapshot.data());
-  //   } catch (error) {
-  //     console.error("Error loading data from Firebase Database", error);
-  //   }
-  // };
-
-  // retrieve();
-  // setIsActive(true);
   useEffect(() => {
     setIsActive(true);
+    setSeconds(0);
+    retrieve();
   }, []);
 
   return (
     <div>
       <div className="home">
         <div className="header"></div>
+        {<Timer />}
 
         <div className="imageContainer">
           <img
@@ -98,6 +96,7 @@ function Level1() {
                 e.nativeEvent.target.offsetWidth,
                 e.nativeEvent.target.offsetHeight,
               ]);
+
               let xTrue = Math.round(
                 (e.nativeEvent.offsetX / e.nativeEvent.target.offsetWidth) * 100
               );
@@ -105,10 +104,11 @@ function Level1() {
                 (e.nativeEvent.offsetY / e.nativeEvent.target.offsetHeight) *
                   100
               );
+              console.log(xTrue);
+              console.log(yTrue);
               setClickLocation([xTrue, yTrue]);
             }}
           ></img>
-          {<Timer />}
           {PlaceTarget(
             targetToggle,
             setTargetToggle,
@@ -121,8 +121,8 @@ function Level1() {
           {waldoCharMarker(punchcard, answer, targetLocation)}
           {wizardCharMarker(punchcard, answer, targetLocation)}
           {odlawCharMarker(punchcard, answer, targetLocation)}
-          {Gameover(punchcard)}
         </div>
+        {Gameover(punchcard)}
       </div>
     </div>
   );
