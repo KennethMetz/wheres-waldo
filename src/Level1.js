@@ -7,14 +7,19 @@ import winter from "./winter.jpg";
 import { getDoc, doc } from "firebase/firestore";
 
 import {
-  recordClickLocation,
   PlaceTarget,
   waldoCharMarker,
   wizardCharMarker,
   odlawCharMarker,
 } from "./Gameplay";
 
-import { useState } from "react";
+import Gameover from "./Gameover";
+
+import Timer from "./Timer";
+
+import { useEffect, useState, useContext } from "react";
+
+import { TimerContext, ScoreContext } from "./TimerContext";
 
 //**********************FIREBASE INITIALIZATION********************
 
@@ -28,9 +33,7 @@ const firebaseConfig = {
 };
 
 const app = firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
-
 export { db };
 
 //*******************FUNCTIONS**********************************
@@ -40,14 +43,13 @@ function Level1() {
   const [targetLocation, setTargetLocation] = useState([0, 0]);
   const [clickLocation, setClickLocation] = useState([0, 0]);
   const [punchcard, setPunchcard] = useState([0, 0, 0]);
-
   const [answer, setAnswer] = useState({
     odlaw: [100, 100],
     waldo: [0, 0],
     wizard: [100, 0],
   });
-
-  let charSelection = null;
+  const [isActive, setIsActive] = useContext(TimerContext);
+  const [seconds, setSeconds] = useContext(ScoreContext);
 
   //COMMENTED OUT TO STOP EXCEEDING FIREBASE QUOTAS
 
@@ -63,14 +65,16 @@ function Level1() {
   // };
 
   // retrieve();
+  // setIsActive(true);
+  useEffect(() => {
+    setIsActive(true);
+  }, []);
 
   return (
     <div>
       <div className="home">
-        <div className="header">
-          {" "}
-          <div className="statusField"></div>{" "}
-        </div>
+        <div className="header"></div>
+
         <div className="imageContainer">
           <img
             className="waldo"
@@ -104,6 +108,7 @@ function Level1() {
               setClickLocation([xTrue, yTrue]);
             }}
           ></img>
+          {<Timer />}
           {PlaceTarget(
             targetToggle,
             setTargetToggle,
@@ -116,6 +121,7 @@ function Level1() {
           {waldoCharMarker(punchcard, answer, targetLocation)}
           {wizardCharMarker(punchcard, answer, targetLocation)}
           {odlawCharMarker(punchcard, answer, targetLocation)}
+          {Gameover(punchcard)}
         </div>
       </div>
     </div>

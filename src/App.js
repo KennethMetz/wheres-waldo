@@ -1,8 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
+import { TimerContext, ScoreContext } from "./TimerContext";
 
 function App() {
+  const [isActive, setIsActive] = useContext(TimerContext);
+  const [seconds, setSeconds] = useContext(ScoreContext);
+
+  useEffect(() => {
+    setIsActive(false);
+    setSeconds(0);
+  }, []);
+
   return (
     <div className="homeContainer">
       <div className="levelTiles">

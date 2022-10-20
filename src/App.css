@@ -24,7 +24,15 @@
   width: 25vw;
   border: 1px black solid;
   border-radius: 8px;
-  box-shadow: rgb(201, 199, 199) 5px 5px 50px 5px;
+}
+
+.L1:hover,
+.L2:hover {
+  box-shadow: rgb(201, 199, 199) 0px 0px 10px 5px;
+}
+
+p:hover {
+  font-weight: 600;
 }
 
 .lbButton {
@@ -38,6 +46,7 @@
   align-items: center;
   background-color: rgb(238, 241, 240);
 }
+
 /*******************HEADER******************/
 .header {
   display: grid;
@@ -81,6 +90,23 @@ div {
   color: black;
   text-decoration: unset;
   font-size: 20px;
+}
+
+li:hover {
+  font-weight: 600;
+}
+/***************CLOCK********************/
+.timer {
+  position: absolute;
+  top: 0px;
+  left: 45%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: black 2px solid;
+  border-radius: 36px;
+  padding: 15px;
+  text-align: center;
+  font-weight: 550;
+  width: 125px;
 }
 
 /***************LEVEL 1********************/
@@ -150,4 +176,13 @@ body {
 #answer {
   position: absolute;
   border-color: rgb(38, 224, 85);
+}
+
+/***************LEADERBOARD********************/
+
+table,
+td,
+th {
+  border: 1px black solid;
+  border-collapse: collapse;
 }

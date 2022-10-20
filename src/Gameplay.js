@@ -1,4 +1,3 @@
-import { useState } from "react";
 import waldoImg from "./waldo.webp";
 import wizard from "./wizard.webp";
 import odlaw from "./odlaw.webp";
@@ -40,6 +39,7 @@ function checkOdlawGuess(answer, clickLocation) {
     return true;
   } else return false;
 }
+
 function PlaceTarget(
   targetToggle,
   setTargetToggle,
@@ -82,10 +82,11 @@ function PlaceTarget(
             className="guessCard"
             id="underlined"
             onClick={(e) => {
-              checkWizardGuess(answer, clickLocation);
-              let temp = punchcard.slice();
-              temp[1] = 1;
-              setpunchcard(temp);
+              if (checkWizardGuess(answer, clickLocation)) {
+                let temp = punchcard.slice();
+                temp[1] = 1;
+                setpunchcard(temp);
+              }
             }}
           >
             <img src={wizard} alt="the wizard"></img>
@@ -95,10 +96,11 @@ function PlaceTarget(
           <div
             className="guessCard"
             onClick={(e) => {
-              checkOdlawGuess(answer, clickLocation);
-              let temp = punchcard.slice();
-              temp[2] = 1;
-              setpunchcard(temp);
+              if (checkOdlawGuess(answer, clickLocation)) {
+                let temp = punchcard.slice();
+                temp[2] = 1;
+                setpunchcard(temp);
+              }
             }}
           >
             <img src={odlaw} alt="odlaw"></img>
@@ -113,7 +115,6 @@ function PlaceTarget(
 
 function waldoCharMarker(punchcard, answer, targetLocation) {
   if (punchcard[0] === 1) {
-    console.log(targetLocation[3]);
     return (
       <div
         id="answer"
@@ -128,10 +129,7 @@ function waldoCharMarker(punchcard, answer, targetLocation) {
 }
 
 function wizardCharMarker(punchcard, answer, targetLocation) {
-  console.log(punchcard);
   if (punchcard[1] === 1) {
-    console.log("da wizzzz");
-
     return (
       <div
         id="answer"
@@ -144,10 +142,9 @@ function wizardCharMarker(punchcard, answer, targetLocation) {
     );
   }
 }
+
 function odlawCharMarker(punchcard, answer, targetLocation) {
   if (punchcard[2] === 1) {
-    console.log("odlaw");
-
     return (
       <div
         id="answer"
