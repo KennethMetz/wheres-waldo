@@ -11,7 +11,7 @@ import { TimerProvider, ScoreProvider } from "./TimerContext";
 const RouteSwitch = () => {
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename="mainBrowserRouter">
         <TimerProvider>
           <ScoreProvider>
             <Header />
