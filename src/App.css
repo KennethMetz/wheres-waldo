@@ -1,3 +1,14 @@
+:root {
+  --blue: #3b82f6;
+  --red: #ef4444;
+  --gray: #6b7280;
+}
+
+@font-face {
+  font-family: "main";
+  src: url(./Roboto-Medium.ttf);
+}
+
 /***************HOME********************/
 .homeContainer {
   display: flex;
@@ -8,6 +19,13 @@
 .levelTiles {
   margin-top: 100px;
   display: flex;
+}
+
+p {
+  list-style: none;
+  color: black;
+  text-decoration: unset;
+  font-size: 30px;
 }
 
 .block1 {
@@ -44,22 +62,46 @@ p:hover {
 
 .lbButton {
   display: flex;
-  margin-top: 100px;
-  width: 30vw;
+  margin-top: 80px;
+  width: 20vw;
+  margin-bottom: 50px;
+
   height: 80px;
-  border: black 1px solid;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
-  background-color: rgb(238, 241, 240);
+  color: white;
+  background-color: var(--gray);
 }
 
 /*******************HEADER******************/
+
+.pageTitle2 {
+  background-clip: text;
+  color: transparent;
+  background-color: var(--red);
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+}
+.pageTitle {
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+  background-color: var(--blue);
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+}
+.pageTitleWrapper {
+  display: flex;
+  margin-left: 20px;
+}
+
 .headerMain {
   display: grid;
   grid-template-columns: 15% 35% 50%;
   align-items: center;
-  height: 120px;
+  height: 110px;
   position: sticky;
   top: 0px;
   margin: 0px;
@@ -85,15 +127,13 @@ p {
 }
 
 h1 {
-  color: black;
   text-decoration: unset;
-  font-size: 48px;
+  font-size: 54px;
   grid-area: 1/2/2/3;
 }
 
 a:link,
 li,
-p,
 div {
   list-style: none;
   color: black;
@@ -169,6 +209,7 @@ body {
   margin: 0px;
   width: 100vw;
   height: 100vh;
+  font-family: "main", Georgia, "Times New Roman", Times, serif;
 }
 
 .home {
@@ -207,19 +248,21 @@ body {
 }
 button {
   background-color: white;
-  border: 1px black solid;
+  border: white 2px solid;
   border-radius: 36px;
-  height: 42px;
+  height: 52px;
   width: 200px;
   margin-left: 20px;
   margin-right: 20px;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
 }
 .cancel {
-  background-color: rgb(255, 181, 181);
+  background-color: var(--red);
 }
 .submit {
-  background-color: rgb(154, 154, 255);
+  background-color: var(--blue);
 }
 .endGameContainer {
   position: absolute;
@@ -260,6 +303,7 @@ input {
   border-radius: 6px;
   border: 1px black solid;
   margin-left: 10px;
+  font-size: 20px;
 }
 /***************LEADERBOARD********************/
 

@@ -19,7 +19,11 @@ function Header() {
         </div>{" "}
       </Link>
       <Link to="/">
-        <h1>WHERE'S WALDO?</h1>
+        <span className="pageTitleWrapper">
+          <h1 className="pageTitle">WHERE'S </h1>
+          <p>&nbsp;&nbsp;</p>
+          <h1 className="pageTitle2"> WALDO?</h1>
+        </span>
       </Link>
       <ul>
         <Link to="level1">
