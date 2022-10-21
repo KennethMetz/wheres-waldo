@@ -1,6 +1,6 @@
 # Where's Waldo?
 
-[Live site here](https://where-s-waldo-427c2.web.app/)
+**View live site [here](https://where-s-waldo-427c2.web.app/).**
 
 ## Summary
 
